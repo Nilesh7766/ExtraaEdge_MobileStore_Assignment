@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/MyLayout.cshtml";
+}
+
+<h1>Index</h1>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<script>
+    baseurl: https://localhost:7018;
+
+
+    $(document).ready(function () {
+        GetAllCustomers();
+    })
+
+    function GetAllCustomers() {
+        $.ajax({
+            url: baseurl+'api/Customers',
+            method: 'get',
+            contentType: 'application/json',
+            success: function (resp) {
+                $("#tbldata").empty();
+                $.each(resp, function (i, d) {
+                    $("#tbldata"), append("<tr><td>" + (i + 1) + "</td><td>" + d.first_name + "</td><td>" + d.last_name + "</td><td>" + d.mobile_number + "</td><td>" + d.email_address + "</td></tr>")
+                })
+            }
+        })
+    }
+
+</script>
+    <div>
+        <table>
+            <tr>
+                <td>First Name</td>
+                <td><input type="text" id="customer" /></td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td><input type="text" id="customer" /></td>
+            </tr>
+            <tr>
+                <td>Mobile Number</td>
+                <td><input type="text" id="customer" /></td>
+            </tr>
+            <tr>
+                <td>Email address</td>
+                <td><input type="text" id="customer" /></td>
+            </tr>
+            <tr>
+
+                <td><input type="button" id="btnAdd" value="submit" /></td>
+            </tr>
+        </table>
+        <hr />
+        <table>
+            <thead>
+                <tr>
+                    <td>First Name</td>
+                    <td>Last Name</td>
+                    <td>Mobile Number</td>
+                    <td>Email address</td>
+                    <td>Action</td>
+                </tr>
+            </thead>
+            <tbody id="tbldata">
+            </tbody>
+        </table>
+    </div>
+
